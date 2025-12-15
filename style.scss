@@ -1,0 +1,381 @@
+
+$colour-wood-side: #cf9f5f;
+$colour-wood-front: #ffdf9f;
+
+$colour-blue-side: #19658c;
+$colour-blue-front: #2393bb;
+$colour-blue-inside-side: #09374d;
+$colour-blue-inside-front: #19658c;
+
+$colour-grey-off-side: #424242;
+$colour-grey-off-front: #707070;
+
+$colour-grey-side: #707070;
+$colour-grey-front: #b7b7b7;
+
+$colour-error-side: #8a0a0a;
+$colour-error-front: #e52210;
+
+html {
+    overflow: hidden;
+}
+
+body {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+
+    perspective: 200vmax;
+    perspective-origin: center;
+
+    transform-style: preserve-3d;
+
+    font-family: sans-serif;
+
+    .block {
+        position: absolute;
+        transform-style: preserve-3d;
+        transform-origin: center;
+
+        cursor: pointer;
+        user-select: none;
+
+        transition-property: transform;
+        transition-duration: 0.2s;
+        transition-timing-function: ease-in-out;
+
+        .face {
+            position: absolute;
+            transform-style: preserve-3d;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+
+            > .text {
+                margin: 2px;
+                word-break: normal;
+            }
+
+            .fraction {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                div {
+                    background-color: currentColor;
+                    height: 1px;
+                    width: 100%;
+                    margin: 2px;
+                }
+            }
+        }
+
+        &.block-number {
+
+            .face {
+                width: 50px;
+                height: 50px;
+
+                background-color: $colour-wood-side;
+
+                transition-property: border-color, background-color;
+                transition-duration: 0.2s;
+                transition-timing-function: ease-in-out;
+
+                &.front {
+                    background-color: $colour-wood-front;
+                }
+            }
+
+            &.error {
+                .face {
+                    color: #ffffff;
+                    background-color: $colour-error-side;
+
+                    &.front {
+                        background-color: $colour-error-front;
+                    }
+                }
+            }
+        }
+
+        &.block-operation {
+
+            color: #ffffff;
+
+            .face {
+                background-color: $colour-blue-side;
+
+                flex-direction: column;
+
+                &.front {
+                    width: 100%;
+                    height: 100%;
+
+                    background-color: transparent;
+
+                    transform: translateZ(70px);
+
+                    .spacer {
+                        width: 100%;
+                        height: 10px;
+                        background-color: $colour-blue-front;
+                    }
+
+                    .operation-row {
+                        width: 100%;
+                        height: 50px;
+
+                        display: flex;
+
+                        transform-style: preserve-3d;
+
+                        .blue {
+                            min-width: 10px;
+                            height: 70px;
+                            margin-block: -10px;
+                            background-color: $colour-blue-front;
+
+                            &.text {
+                                min-width: unset;
+                                padding-inline: 10px;
+                                display: flex;
+                                align-items: center;
+                                font-size: 24px;
+                            }
+                        }
+
+                        .slot {
+                            min-width: 50px;
+
+                            transform-style: preserve-3d;
+                            position: relative;
+
+                            .face {
+                                position: absolute;
+                                transform-style: preserve-3d;
+
+                                &.back {
+                                    width: 60px;
+                                    height: 60px;
+                                    background-color: $colour-blue-inside-front;
+                                    transform: translate3d(-5px, -5px, -40px);
+                                }
+
+                                &.left,
+                                &.right,
+                                &.top,
+                                &.bottom {
+                                    width: 60px;
+                                    height: 40px;
+                                    background-color: $colour-blue-inside-side;
+
+                                    transform: none;
+
+                                    &.left {
+                                        transform:
+                                            translateX(-30px)
+                                            rotateY(90deg)
+                                            translateY(5px)
+                                            rotateZ(90deg)
+                                            translateY(-20px);
+                                    }
+
+                                    &.right {
+                                        transform:
+                                            translateX(30px)
+                                            rotateY(90deg)
+                                            translateY(5px)
+                                            rotateZ(90deg)
+                                            translateY(-20px);
+                                    }
+
+                                    &.top {
+                                        transform:
+                                            rotateX(90deg)
+                                            translateX(-5px)
+                                            translateY(-20px)
+                                            translateZ(20px);
+                                    }
+
+                                    &.bottom {
+                                        transform:
+                                            rotateX(90deg)
+                                            translateX(-5px)
+                                            translateY(-20px)
+                                            translateZ(-30px);
+                                    }
+                                }
+                            }
+                        }
+
+                        .button-slot {
+                            min-width: 50px;
+                            height: 70px;
+                            margin-left: -10px;
+                            margin-block: -10px;
+
+                            background-color: $colour-blue-front;
+
+                            transform-style: preserve-3d;
+                        }
+                    }
+                }
+
+                &.left,
+                &.right {
+                    width: 70px;
+                    height: 70px;
+
+                    &.left {
+                        transform:
+                            translateZ(35px)
+                            rotateY(270deg)
+                            translateZ(35px);
+                    }
+
+                    &.right {
+                        right: 0;
+                        transform:
+                            translateZ(35px)
+                            rotateY(90deg)
+                            translateZ(35px);
+                    }
+                }
+
+                &.top,
+                &.bottom {
+                    width: 100%;
+                    height: 70px;
+
+                    &.top {
+                        transform:
+                            translateZ(35px)
+                            rotateX(90deg)
+                            translateZ(35px);
+                    }
+
+                    &.bottom {
+                        transform:
+                            translateZ(35px)
+                            rotateX(270deg)
+                            translateZ(35px);
+                    }
+                }
+
+                .hole {
+                    width: 50px;
+                    height: 50px;
+
+                    background-color: $colour-blue-inside-side;
+                }
+            }
+        }
+
+        &.block-button {
+            --press-distance: 0px;
+
+            &.pressed {
+                --press-distance: 5px;
+            }
+
+            &.enabled {
+                .face {
+                    background-color: $colour-grey-side;
+
+                    &.front {
+                        background-color: $colour-grey-front;
+                    }
+                }
+            }
+
+            .face {
+                background-color: $colour-grey-off-side;
+
+                transition-property: transform, width, height, background-color;
+                transition-duration: 0.2s;
+                transition-timing-function: ease-in-out;
+
+                &.front {
+                    width: 30px;
+                    height: 30px;
+
+                    background-color: $colour-grey-off-front;
+
+                    transform: translateZ(10px);
+                }
+
+                &.left,
+                &.right {
+                    width: calc(10px - var(--press-distance));
+                    height: 30px;
+
+                    &.left {
+                        transform:
+                                translateZ(calc(5px + var(--press-distance) / 2))
+                                rotateY(270deg)
+                                translateZ(calc(5px - var(--press-distance) / 2));
+                    }
+
+                    &.right {
+                        right: 0;
+                        transform:
+                                translateZ(calc(5px + var(--press-distance) / 2))
+                                rotateY(90deg)
+                                translateZ(calc(5px - var(--press-distance) / 2));
+                    }
+                }
+
+                &.top,
+                &.bottom {
+                    width: 30px;
+                    height: calc(10px - var(--press-distance));
+
+                    &.top {
+                        transform:
+                                translateZ(calc(5px + var(--press-distance) / 2))
+                                rotateX(90deg)
+                                translateZ(calc(5px - var(--press-distance) / 2));
+                    }
+
+                    &.bottom {
+                        bottom: 0;
+                        transform:
+                                translateZ(calc(5px + var(--press-distance) / 2))
+                                rotateX(270deg)
+                                translateZ(calc(5px - var(--press-distance) / 2));
+                    }
+                }
+            }
+        }
+    }
+
+    .shadow {
+        position: absolute;
+        transform-style: preserve-3d;
+        background-color: #000000;
+        box-shadow: 0 0 8px 12px #000000;
+        opacity: 75%;
+
+        transition-property: width, height, box-shadow, opacity;
+        transition-duration: 0.2s;
+        transition-timing-function: ease-in-out;
+
+        &.lifted {
+            box-shadow: 0 0 16px 16px #000000;
+            opacity: 25%;
+        }
+
+        &.pressed {
+            box-shadow: 0 0 4px 12px #000000;
+        }
+
+        &.hidden {
+            display: none;
+        }
+    }
+}
