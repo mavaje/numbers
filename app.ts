@@ -38,4 +38,4 @@ import {Rational} from "./rational.js";
 setTimeout(() => Block.instances.forEach(block => block.update()));
 
 // Rational.test(false);
-Rational.test(true);
+// Rational.test(true);

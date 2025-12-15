@@ -6,5 +6,7 @@
     "target": "esnext",
     "allowJs": true
   },
-  "files": ["main.ts"]
+  "files": [
+    "app.ts"
+  ]
 }

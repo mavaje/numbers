@@ -1,10 +1,14 @@
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import * as path from "node:path";
 
 export default {
     entry: [
-        './main.ts',
+        './app.ts',
         './style.scss',
     ],
+    output: {
+        path: path.resolve(''),
+    },
     mode: 'production',
     plugins: [
         new MiniCssExtractPlugin(),
